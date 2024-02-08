@@ -1,16 +1,11 @@
 import { ConfigModule } from '@nestjs/config'
-import { ServeStaticModule } from '@nestjs/serve-static'
 import { SequelizeModule } from '@nestjs/sequelize'
-import { join } from 'path'
 import { User } from '../users/users.model'
+import { DocumentBuilder } from '@nestjs/swagger'
 
 export const AppConfig = ConfigModule.forRoot({
   isGlobal: true,
   envFilePath: [`.${process.env.NODE_ENV}.env`],
-})
-
-export const StaticServeConfig = ServeStaticModule.forRoot({
-  rootPath: join(__dirname, '../../..', 'public'),
 })
 
 export const DB_Config = SequelizeModule.forRoot({
@@ -23,3 +18,10 @@ export const DB_Config = SequelizeModule.forRoot({
   models: [User],
   autoLoadModels: true,
 })
+
+export const SwaggerConfig = new DocumentBuilder()
+  .setTitle('NestJS-auth')
+  .setDescription('Basic authentication/authorization with roles')
+  .addTag('created by Alex')
+  .setVersion('1.0.0')
+  .build()
