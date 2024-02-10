@@ -5,7 +5,7 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 @ApiTags('Root')
 @Controller('api')
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private appService: AppService) {}
 
   @ApiOperation({ summary: 'Test endpoint' })
   @ApiResponse({ status: 200 })

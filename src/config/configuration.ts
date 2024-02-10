@@ -1,7 +1,9 @@
 import { ConfigModule } from '@nestjs/config'
 import { SequelizeModule } from '@nestjs/sequelize'
-import { User } from '../users/users.model'
 import { DocumentBuilder } from '@nestjs/swagger'
+import { User } from '../users/users.model'
+import { Role } from '../roles/roles.model'
+import { UserRoles } from '../roles/user-roles.model'
 
 export const AppConfig = ConfigModule.forRoot({
   isGlobal: true,
@@ -15,7 +17,7 @@ export const DB_Config = SequelizeModule.forRoot({
   username: process.env.POSTGRES_USER,
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DB,
-  models: [User],
+  models: [User, Role, UserRoles],
   autoLoadModels: true,
 })
 
