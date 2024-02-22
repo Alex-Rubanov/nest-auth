@@ -1,4 +1,5 @@
 import { ConfigModule } from '@nestjs/config'
+import { JwtModule } from '@nestjs/jwt'
 import { SequelizeModule } from '@nestjs/sequelize'
 import { DocumentBuilder } from '@nestjs/swagger'
 import { User } from '../users/users.model'
@@ -27,3 +28,11 @@ export const SwaggerConfig = new DocumentBuilder()
   .addTag('created by Alex')
   .setVersion('1.0.0')
   .build()
+
+export const JWTConfig = JwtModule.register({
+  global: true,
+  secret: process.env.SECRET_KEY || 'SECRET',
+  signOptions: {
+    expiresIn: '24h',
+  },
+})

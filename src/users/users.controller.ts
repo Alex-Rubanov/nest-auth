@@ -1,11 +1,13 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common'
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common'
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { UsersService } from './users.service'
 import { CreateUserDto } from './dto/create-user.dto'
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { User } from './users.model'
+import { JwtAuthGuard } from '../auth/jwt-auth.guard'
 
 @ApiTags('Users')
 @Controller('users')
+@UseGuards(JwtAuthGuard)
 export class UsersController {
   constructor(private readonly userService: UsersService) {}
 
@@ -21,6 +23,11 @@ export class UsersController {
   @Get(':id')
   getById(@Param('id') id: string) {
     return this.userService.getById(id)
+  }
+
+  @Post('email')
+  getByEmail(@Body() email: string) {
+    return this.userService.getByEmail(email)
   }
 
   @ApiOperation({ summary: 'Create new user' })
