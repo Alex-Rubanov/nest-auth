@@ -4,6 +4,8 @@ import { UsersService } from './users.service'
 import { CreateUserDto } from './dto/create-user.dto'
 import { User } from './users.model'
 import { JwtAuthGuard } from '../auth/jwt-auth.guard'
+import { Roles } from '../auth/roles-auth.decorator'
+import { RolesGuard } from '../auth/roles.guard'
 
 @ApiTags('Users')
 @Controller('users')
@@ -14,12 +16,14 @@ export class UsersController {
   @ApiOperation({ summary: 'Retrieving all users information' })
   @ApiResponse({ status: 200, type: [User] })
   @Get()
+  @UseGuards(RolesGuard)
   getAll() {
     return this.userService.getAllUsers()
   }
 
   @ApiOperation({ summary: 'Get user information by id' })
   @ApiResponse({ status: 200, type: User })
+  @Roles('ADMIN')
   @Get(':id')
   getById(@Param('id') id: string) {
     return this.userService.getById(id)

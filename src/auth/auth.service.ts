@@ -42,6 +42,8 @@ export class AuthService {
   private async validateUser(dto: CreateUserDto) {
     const user = await this.userService.getByEmail(dto.email)
 
+    console.log('GET_USER_BY_EMAIL>> ', user)
+
     if (!user) {
       throw new UnauthorizedException({ message: 'User with this email does not exist' })
     }
