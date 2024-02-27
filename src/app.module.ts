@@ -5,9 +5,10 @@ import { RolesModule } from './roles/roles.module'
 import { AuthModule } from './auth/auth.module'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
+import { PostsModule } from './posts/posts.module'
 
 @Module({
-  imports: [AppConfig, DB_Config, UsersModule, RolesModule, AuthModule],
+  imports: [AppConfig, DB_Config, UsersModule, RolesModule, AuthModule, PostsModule],
   controllers: [AppController],
   providers: [AppService],
 })

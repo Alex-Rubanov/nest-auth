@@ -2,6 +2,7 @@ import { ConfigModule } from '@nestjs/config'
 import { JwtModule } from '@nestjs/jwt'
 import { SequelizeModule } from '@nestjs/sequelize'
 import { DocumentBuilder } from '@nestjs/swagger'
+import { Post } from '../posts/posts.model'
 import { User } from '../users/users.model'
 import { Role } from '../roles/roles.model'
 import { UserRoles } from '../roles/user-roles.model'
@@ -18,7 +19,7 @@ export const DB_Config = SequelizeModule.forRoot({
   username: process.env.POSTGRES_USER,
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DB,
-  models: [User, Role, UserRoles],
+  models: [User, Role, UserRoles, Post],
   autoLoadModels: true,
 })
 
