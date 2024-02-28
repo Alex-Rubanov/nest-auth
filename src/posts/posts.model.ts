@@ -4,7 +4,7 @@ import { User } from '../users/users.model'
 interface PostInterface {
   title: string
   content: string
-  // imageUrl: string
+  imageUrl: string
 }
 
 @Table({ tableName: 'posts' })
@@ -18,8 +18,8 @@ export class Post extends Model<Post, PostInterface> {
   @Column({ type: DataType.STRING, allowNull: false })
   content: string
 
-  // @Column({ type: DataType.STRING })
-  // imageUrl: string
+  @Column({ type: DataType.STRING })
+  imageUrl: string
 
   @ForeignKey(() => User)
   @Column({ type: DataType.INTEGER })
